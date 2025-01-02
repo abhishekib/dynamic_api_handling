@@ -5,7 +5,7 @@ import 'package:allworkdone/model.dart';
 class CategoryController extends GetxController {
   final CategoryProvider _provider = CategoryProvider();
   var isLoading = true.obs;
-  var apiResponse = ApiResponseHandler(data: {}).obs;
+  var apiResponse = ApiResponseHandler(data: {}, posts: []).obs;
 
   @override
   void onInit() {

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:allworkdone/controller.dart';
+import 'package:allworkdone/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,12 @@ class RootScreen extends StatelessWidget {
     final CategoryController controller = Get.put(CategoryController());
 
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Get.to(() => SearchPage());
+        },
+        child: Icon(Icons.search),
+      ),
       appBar: AppBar(
         title: Text("Cities"),
       ),
@@ -21,7 +28,7 @@ class RootScreen extends StatelessWidget {
         final data = controller.apiResponse.value.data;
 
         if (data.isEmpty) {
-          return Center(child: Text("No data available")); 
+          return Center(child: Text("No data available"));
         }
 
         // Combine cities from all countries into a single map

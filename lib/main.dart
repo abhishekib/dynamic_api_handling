@@ -1,4 +1,5 @@
 import 'package:allworkdone/pages.dart';
+import 'package:allworkdone/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: RootScreen(),
+      home: SearchPage(),
     );
   }
 }

@@ -1,10 +1,21 @@
 class ApiResponseHandler {
   final Map<String, dynamic> data;
+  final List<Post>? posts;
+  final int? totalPages;
 
-  ApiResponseHandler({required this.data});
+  ApiResponseHandler({
+    required this.data,
+    required this.posts,
+    this.totalPages,
+  });
 
   factory ApiResponseHandler.fromJson(Map<String, dynamic> json) {
-    return ApiResponseHandler(data: parseData(json));
+    return ApiResponseHandler(
+      data: parseData(json),
+      posts: (json['data'] as List<dynamic>? ?? [])
+          .map((item) => Post.fromJson(item))
+          .toList(),
+    );
   }
 
   static dynamic parseData(dynamic value) {
@@ -15,6 +26,31 @@ class ApiResponseHandler {
     } else {
       return value; // Return primitive values as is
     }
+  }
+}
+
+class Post {
+  final String postType;
+  final String id;
+  final String title;
+  final List<ContentData> contentData;
+
+  Post({
+    required this.postType,
+    required this.id,
+    required this.title,
+    required this.contentData,
+  });
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      postType: json['posttype'] ?? '',
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      contentData: (json['cdata'] as List<dynamic>? ?? [])
+          .map((data) => ContentData.fromJson(data))
+          .toList(),
+    );
   }
 }
 
